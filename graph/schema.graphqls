@@ -1,0 +1,35 @@
+type Query {
+    todos(filter: TodosFilter, limit: Int = 10, offset: Int = 0): [Todo!]!
+    usersConnection(first: Int, after: ID): UsersConnection!
+}
+
+type Todo {
+    id: ID!
+    text: String!
+}
+input TodosFilter {
+    id: ID!
+}
+
+type User {
+    id: ID!
+    firstName: String!
+    lastName: String!
+}
+
+type UsersEdge {
+    node: User
+    cursor: ID!
+}
+
+type UsersConnection {
+    edges: [UsersEdge]
+    pageInfo: PageInfo!
+    totalCount: Int
+}
+
+type PageInfo {
+    startCursor: ID!
+    endCursor: ID!
+    hasNextPage: Boolean!
+}
